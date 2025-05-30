@@ -23,7 +23,8 @@ jobs:
           aosp-clang: true
           extra-cmd: LD=ld.lld AS=llvm-as
           ccache: false
-          #android-version: 15-qpr2
+          disable-lto: true
+          anykernel3: true
           aosp-clang-version: r536225
           ksu: false
           ksu-lkm: false
