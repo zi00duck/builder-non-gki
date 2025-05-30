@@ -15,7 +15,7 @@ jobs:
       - name: Build Kernel
         uses: dabao1955/kernel_build_action@main
         with:
-          kernel-url: https://github.com/AcmeUI-Devices/android_kernel_xiaomi_cas
+          kernel-url: https://github.com/RainyXeon/android_kernel_xiaomi_mt6877
           kernel-branch: susfs
           config: ruby_defconfig
           arch: arm64
