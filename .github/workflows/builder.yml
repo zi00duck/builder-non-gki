@@ -20,3 +20,10 @@ jobs:
           config: ruby_defconfig
           arch: arm64
           aosp-gcc: true
+          aosp-clang: true
+          extra-cmd: LD=ld.lld AS=llvm-as
+          ccache: false
+          #android-version: 15-qpr2
+          aosp-clang-version: r536225
+          ksu: false
+          ksu-lkm: false
