@@ -15,7 +15,7 @@ jobs:
       - name: Build Kernel
         uses: dabao1955/kernel_build_action@main
         with:
-          kernel-url: https://github.com/RainyXeon/android_kernel_xiaomi_mt6877
+          kernel-url: https://github.com/RainyXeon/MoonWake
           kernel-branch: susfs
           config: ruby_defconfig
           arch: arm64
@@ -27,4 +27,6 @@ jobs:
           anykernel3: true
           aosp-clang-version: r536225
           ksu: false
-          ksu-lkm: false
+          ksu-other: true
+          ksu-url: https://github.com/rifsxd/KernelSU-Next
+          ksu-version: next-susfs
