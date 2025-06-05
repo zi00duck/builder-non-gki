@@ -1,4 +1,4 @@
-name: "Build Kernel"
+name: "T"
 
 env:
   OUT_DIR: "${{ github.workspace }}/out"
@@ -13,7 +13,7 @@ jobs:
     env:
       WORKSPACE: ${{ github.workspace }}
       KERNEL_DEVICE: ruby
-      name: ${{ env.KERNEL_DEVICE }}-apatch.img
+      name: "${{ env.KERNEL_DEVICE }}-apatch.img"
     steps:
       - name: "Test"
-        run: "echo ${{ env.KERNEL_DEVICE }}-apatch-${{ env.APatchVersion }}-${{ env.builddate }}.img"
+        run: "echo ${{ env.name }}"
