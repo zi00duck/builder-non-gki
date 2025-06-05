@@ -1,0 +1,19 @@
+name: "Build Kernel"
+
+env:
+  OUT_DIR: "${{ github.workspace }}/out"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Build-Kernel:
+    name: "Build kernel"
+    runs-on: ubuntu-24.04
+    env:
+      WORKSPACE: ${{ github.workspace }}
+      KERNEL_DEVICE: ruby
+      name: ${{ env.KERNEL_DEVICE }}-apatch.img
+    steps:
+      - name: "Test"
+        run: "echo ${{ env.KERNEL_DEVICE }}-apatch-${{ env.APatchVersion }}-${{ env.builddate }}.img"
