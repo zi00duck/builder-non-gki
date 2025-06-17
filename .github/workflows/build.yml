@@ -257,6 +257,7 @@ jobs:
       - name: "Patch with kernel patch"
         if: ${{ env.useKernelPatch == 'true' }}
         run: |
+          mkdir kernel_patch_processing
           cd kernel_patch_processing
           curl -L -O https://github.com/bmax121/KernelPatch/releases/download/0.11.3/kptools-linux
           curl -L -O https://github.com/SukiSU-Ultra/SukiSU_KernelPatch_patch/releases/download/0.12.0/kpimg
@@ -271,7 +272,7 @@ jobs:
         if: ${{ env.useAnykernel == 'true' }}
         run: |
           ls -al
-          cp -f ./out_kernel/. ./AnyKernel3/
+          cp -f -r ./out_kernel/. ./AnyKernel3/
           cd AnyKernel3/
           rm -rf ./Image
           zip -q -r "anykernel.main.zip" *
