@@ -53,7 +53,7 @@
       "imageurl": "https://github.com/RainyXeon/MoonWake/releases/download/cloud/og-apatch.img"
     },
     "AnyKernel3": {
-      "use": true,
+      "use": false,
       "release": true,
       "repo": "https://github.com/wodanesdag/AnyKernel3/",
       "branch": "ruby"
@@ -113,7 +113,7 @@
       "imageurl": "https://github.com/RainyXeon/MoonWake/releases/download/cloud/og-apatch.img"
     },
     "AnyKernel3": {
-      "use": true,
+      "use": false,
       "release": true,
       "repo": "https://github.com/wodanesdag/AnyKernel3/",
       "branch": "ruby"
@@ -173,7 +173,7 @@
       "imageurl": "https://github.com/RainyXeon/MoonWake/releases/download/cloud/og-apatch.img"
     },
     "AnyKernel3": {
-      "use": true,
+      "use": false,
       "release": true,
       "repo": "https://github.com/wodanesdag/AnyKernel3/",
       "branch": "ruby"
