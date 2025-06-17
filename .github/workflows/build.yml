@@ -298,13 +298,13 @@ jobs:
           cp -f -r ./out_kernel/. ./AnyKernel3/
           cd AnyKernel3/
           rm -rf ./Image
-          zip -q -r "anykernel.main.zip" *
+          zip -q -r "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
       - name: "Upload AnyKernel3 image"
         uses: actions/upload-artifact@v4
         if: ${{ env.useAnykernel == 'true' }}
         with:
           name: "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
-          path: ./AnyKernel3/anykernel.main.zip
+          path: ./AnyKernel3/anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}
       - name: "Pack kernel image"
         if: ${{ env.useImage == 'true' }}
         run: | 
