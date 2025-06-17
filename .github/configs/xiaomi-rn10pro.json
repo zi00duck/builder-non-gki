@@ -8,6 +8,7 @@
       "device": "sweet",
       "defconfig": "sweet_defconfig"
     },
+    "useKernelPatch": false,
     "kernelsu": {
       "enable": true,
       "setupLink": "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh",
@@ -68,6 +69,7 @@
       "device": "sweet",
       "defconfig": "sweet_defconfig"
     },
+    "useKernelPatch": true,
     "kernelsu": {
       "enable": true,
       "setupLink": "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh",
