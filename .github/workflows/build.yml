@@ -5,10 +5,16 @@ env:
 
 on:
   workflow_dispatch:
+    inputs:
+      config_file:
+        description: 'Path to a specific config JSON file (optional). Leave blank to use all configs.'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   Set-repos:
-    name: "Parse configs.json"
+    name: "Parse configs.json (specific or all)"
     runs-on: ubuntu-24.04
     outputs:
       repos: ${{ steps.generate-matrix.outputs.repos }}
@@ -16,13 +22,30 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
-
-      - name: "Generate Matrix"
+      - name: "Generate Matrix from config"
         id: generate-matrix
         run: |
-          echo "repos<<EOF" >> $GITHUB_OUTPUT
-          jq -s '[.[][]]' .github/configs/*.json >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          CONFIG_FILE="${{ github.event.inputs.config_file }}"
+          echo "Selected config file: '$CONFIG_FILE'"
+
+          if [ -n "$CONFIG_FILE" ]; then
+            # User provided config file, check if exists
+            if [ -f "./.github/configs/$CONFIG_FILE" ]; then
+              echo "Using specified config file: $CONFIG_FILE"
+              echo "repos<<EOF" >> $GITHUB_OUTPUT
+              jq -s '[.[][]]' "$CONFIG_FILE" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+            else
+              echo "ERROR: Specified config file '$CONFIG_FILE' does not exist!" >&2
+              exit 1
+            fi
+          else
+            # No file specified, use all files
+            echo "No config_file input provided. Using all .github/configs/*.json files."
+            echo "repos<<EOF" >> $GITHUB_OUTPUT
+            jq -s '[.[][]]' .github/configs/*.json >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
       - name: "Set builddate"
         id: generate-builddate
         run: echo "builddate=$(date '+%Y%m%d-%H%M')" >> $GITHUB_OUTPUT
