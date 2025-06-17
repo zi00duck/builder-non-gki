@@ -56,9 +56,12 @@ jobs:
       kernelSUsetupName: ${{ matrix.repos.kernelsu.setupName }}
       kernelSUsusfsLink: ${{ matrix.repos.kernelsu.susfsLink }}
       kernelSUneedPatch: ${{ matrix.repos.kernelsu.needPatch }}
-      ccache: ${{ matrix.repos.ccache }}
+
+      useKernelPatch: ${{ matrix.repos.useKernelPatch }}
       useAnykernel: ${{ matrix.repos.AnyKernel3.use }}
       useImage: ${{ matrix.repos.image.use }}
+
+      ccache: ${{ matrix.repos.ccache }}
       release: ${{ matrix.repos.AnyKernel3.release }}
     steps:
       - name: "Install prerequisites"
@@ -227,41 +230,58 @@ jobs:
         run: |
           echo "PATH Variable: $PATH"
           make ${{ env.args }}
-      - name: "Pack AnyKernel3.zip"
-        if: ${{ env.useAnykernel == 'true' }}
-        env:
-          arch: ${{ steps.generate-args.outputs.ARCH }}
-        run: |
-          ls -al
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz ./AnyKernel3/
-          fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo ./AnyKernel3/
-          fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo.img" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo.img ./AnyKernel3/
-          fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb.img" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb.img ./AnyKernel3/
-          fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb ./AnyKernel3/
-          fi
-          cd AnyKernel3/
-      - name: "Upload AnyKernel3 image"
-        uses: actions/upload-artifact@v4
-        if: ${{ env.useAnykernel == 'true' }}
-        with:
-          name: "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
-          path: AnyKernel3/*
       - name: "Push to out_kernel folder and download ramdisk"
         if: ${{ env.useImage == 'true' }}
         env:
           arch: ${{ steps.generate-args.outputs.ARCH }}
         run: |
+          ls -al
           mkdir out_kernel
-          cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
+          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image" ]; then
+            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
+          fi
+          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz" ]; then
+            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz ./out_kernel/
+          fi
+          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo" ]; then
+            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo ./out_kernel/
+          fi
+          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo.img" ]; then
+            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo.img ./out_kernel/
+          fi
+          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb.img" ]; then
+            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb.img ./out_kernel/
+          fi
+          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb" ]; then
+            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb ./out_kernel/
+          fi
+      - name: "Patch with kernel patch"
+        if: ${{ env.useKernelPatch == 'true' }}
+        run: |
+          cd kernel_patch_processing
+          curl -L -O https://github.com/bmax121/KernelPatch/releases/download/0.11.3/kptools-linux
+          curl -L -O https://github.com/SukiSU-Ultra/SukiSU_KernelPatch_patch/releases/download/0.12.0/kpimg
+          chmod +x ./kptools-linux 
+          ./kptools-linux -p -s 123 -i ../out_kernel/Image -k kpimg -o ./oImage
+          rm -rf ../out_kernel/Image
+          rm -rf ../out_kernel/Image.gz
+          gzip -c ./oImage > ./Image.gz
+          mv ./oImage ../out_kernel/Image
+          mv ./Image.gz ../out_kernel/Image.gz
+      - name: "Pack AnyKernel3.zip"
+        if: ${{ env.useAnykernel == 'true' }}
+        run: |
+          ls -al
+          cp -f ./out_kernel/. ./AnyKernel3/
+          cd AnyKernel3/
+          rm -rf ./Image
+          zip -q -r "anykernel.main.zip" *
+      - name: "Upload AnyKernel3 image"
+        uses: actions/upload-artifact@v4
+        if: ${{ env.useAnykernel == 'true' }}
+        with:
+          name: "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
+          path: ./out_kernel/anykernel.main.zip
       - name: "Pack kernel image"
         if: ${{ env.useImage == 'true' }}
         run: | 
