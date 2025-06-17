@@ -281,7 +281,7 @@ jobs:
         if: ${{ env.useAnykernel == 'true' }}
         with:
           name: "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
-          path: ./out_kernel/anykernel.main.zip
+          path: ./AnyKernel3/anykernel.main.zip
       - name: "Pack kernel image"
         if: ${{ env.useImage == 'true' }}
         run: | 
