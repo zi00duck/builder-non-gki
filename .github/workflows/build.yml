@@ -31,12 +31,12 @@ jobs:
           if [ -n "$CONFIG_FILE" ]; then
             # User provided config file, check if exists
             if [ -f "./.github/configs/$CONFIG_FILE" ]; then
-              echo "Using specified config file: $CONFIG_FILE"
+              echo "Using specified config file: ./.github/configs/$CONFIG_FILE"
               echo "repos<<EOF" >> $GITHUB_OUTPUT
-              jq -s '[.[][]]' "$CONFIG_FILE" >> $GITHUB_OUTPUT
+              jq -s '[.[][]]' "./.github/configs/$CONFIG_FILE" >> $GITHUB_OUTPUT
               echo "EOF" >> $GITHUB_OUTPUT
             else
-              echo "ERROR: Specified config file '$CONFIG_FILE' does not exist!" >&2
+              echo "ERROR: Specified config file './.github/configs/$CONFIG_FILE' does not exist!" >&2
               exit 1
             fi
           else
