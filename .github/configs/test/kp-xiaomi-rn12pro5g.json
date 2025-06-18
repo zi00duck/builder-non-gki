@@ -10,7 +10,7 @@
     },
     "kp": {
       "use": true,
-      "kpimg_link": "https://github.com/bmax121/KernelPatch/releases/download/0.12.0/kpimg-android"
+      "kpimg_link": "https://github.com/RainyKernelBuilder/RainyKernelBuilder/releases/download/cloud/kpimg"
     }, 
     "kernelsu": {
       "enable": false,
