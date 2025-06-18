@@ -9,7 +9,7 @@
   },
   "kp": {
     "use": true,
-    "kpimg_link": "https://github.com/RainyKernelBuilder/RainyKernelBuilder/releases/download/cloud/kpimg"
+    "kpimg_link": "https://github.com/StarifyBuilder/StarifyBuilder/releases/download/cloud/kpimg"
   }, 
   "kernelsu": {
     "enable": false,
