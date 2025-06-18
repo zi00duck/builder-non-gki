@@ -41,7 +41,7 @@ jobs:
             if [ -f "./.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE" ]; then
               echo "Using specified config file: ./.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE"
               echo "repos<<EOF" >> $GITHUB_OUTPUT
-              jq -s '[.[][]]' "./.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE" >> $GITHUB_OUTPUT
+              jq -s '[.[]]' "./.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE" >> $GITHUB_OUTPUT
               echo "EOF" >> $GITHUB_OUTPUT
             else
               echo "ERROR: Specified config file './.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE' does not exist!" >&2
