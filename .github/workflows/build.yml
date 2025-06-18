@@ -13,8 +13,7 @@ on:
         default: 'production'
         options:
           - production
-          - peer-variant
-          - test
+          - development
       config_file:
         description: 'Path to a specific config JSON file (optional). Leave blank to use all configs.'
         required: false
@@ -52,7 +51,7 @@ jobs:
             # No file specified, use all files
             echo "No config_file input provided. Using all .github/configs/${{ github.event.inputs.config_type }}/*.json files."
             echo "repos<<EOF" >> $GITHUB_OUTPUT
-            jq -s '[.[][]]' .github/configs/${{ github.event.inputs.config_type }}/*.json >> $GITHUB_OUTPUT
+            jq -s '[.[]]' .github/configs/${{ github.event.inputs.config_type }}/*.json >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           fi
       - name: "Set builddate"
