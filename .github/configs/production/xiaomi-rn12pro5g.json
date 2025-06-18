@@ -8,7 +8,10 @@
       "device": "ruby",
       "defconfig": "ruby_defconfig"
     },
-    "useKernelPatch": false,
+    "kp": {
+      "use": false,
+      "kpimg_link": ""
+    }, 
     "kernelsu": {
       "enable": true,
       "setupLink": "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh",
@@ -69,7 +72,10 @@
       "device": "ruby",
       "defconfig": "ruby_defconfig"
     },
-    "useKernelPatch": true,
+    "kp": {
+      "use": true,
+      "kpimg_link": "https://github.com/SukiSU-Ultra/SukiSU_KernelPatch_patch/releases/download/0.12.0/kpimg"
+    },
     "kernelsu": {
       "enable": true,
       "setupLink": "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh",
@@ -130,7 +136,10 @@
       "device": "ruby",
       "defconfig": "ruby_defconfig"
     },
-    "useKernelPatch": false,
+    "kp": {
+      "use": false,
+      "kpimg_link": ""
+    }, 
     "kernelsu": {
       "enable": false,
       "setupLink": "",

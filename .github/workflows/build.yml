@@ -89,7 +89,8 @@ jobs:
       kernelSUsusfsLink: ${{ matrix.repos.kernelsu.susfsLink }}
       kernelSUneedPatch: ${{ matrix.repos.kernelsu.needPatch }}
 
-      useKernelPatch: ${{ matrix.repos.useKernelPatch }}
+      useKernelPatch: ${{ matrix.repos.kp.use }}
+      kpKpimgLink: ${{ matrix.repos.kp.kpimg_link }}
       useAnykernel: ${{ matrix.repos.AnyKernel3.use }}
       useImage: ${{ matrix.repos.image.use }}
 
@@ -292,8 +293,11 @@ jobs:
           mkdir kernel_patch_processing
           cd kernel_patch_processing
           curl -L -O https://github.com/bmax121/KernelPatch/releases/download/0.11.3/kptools-linux
-          curl -L -O https://github.com/SukiSU-Ultra/SukiSU_KernelPatch_patch/releases/download/0.12.0/kpimg
-          chmod +x ./kptools-linux 
+          curl -L -O ${{ env.kpKpimgLink }}
+          chmod +x ./kptools-linux
+          if [ -e "./kpimg-android" ]; then
+            mv ./kpimg-android ./kpimg
+          fi
           ./kptools-linux -p -s "RainyPatch@111" -i ../out_kernel/Image -k kpimg -o ./oImage
           rm -rf ../out_kernel/Image
           rm -rf ../out_kernel/Image.gz
