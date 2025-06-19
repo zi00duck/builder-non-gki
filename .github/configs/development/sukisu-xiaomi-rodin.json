@@ -52,14 +52,14 @@
     }
   },
   "image": {
-    "use": true,
+    "use": false,
     "imageUrl": "https://github.com/StarifyBuilder/StarifyBuilder/releases/download/cloud/rodin-original-boot.img",
     "imageName": "rodin-original-boot.img"
   },
   "AnyKernel3": {
-    "use": false,
+    "use": true,
     "release": true,
-    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
-    "branch": "ruby"
+    "repo": "https://github.com/skglab-dev/AnyKernel3",
+    "branch": "rodin"
   }
 }
