@@ -5,7 +5,7 @@
     "repo": "https://github.com/StarifyBuilder/android_kernel_xiaomi_cepheus",
     "branch": "15.0",
     "device": "cepheus",
-    "defconfig": "sweet_defconfig"
+    "defconfig": "cepheus_defconfig"
   },
   "kp": {
     "use": true,
