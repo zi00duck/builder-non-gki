@@ -14,6 +14,16 @@ on:
         options:
           - production
           - development
+      config_mode:
+        description: 'Choose a root solution, if this not empty, it will only build that specific type'
+        required: false
+        type: choice
+        default: 'production'
+        options:
+          - ksun
+          - sukisu
+          - vanilla
+          - kp
       config_file:
         description: 'Path to a specific config JSON file (optional). Leave blank to use all configs.'
         required: false
@@ -30,6 +40,48 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3
+      - name: "Generate Matrix from config"
+        id: generate-matrix
+        run: |
+          CONFIG_FILE="${{ github.event.inputs.config_file }}"
+          CONFIG_TYPE="${{ github.event.inputs.config_type }}"
+          CONFIG_MODE="${{ github.event.inputs.config_mode }}"
+
+          echo "Selected config file: '$CONFIG_FILE'"
+
+          if [ -n "$CONFIG_FILE" ]; then
+            # User provided config file, check if exists
+            if [ -f "./.github/configs/$CONFIG_TYPE/$CONFIG_FILE" ]; then
+              echo "Using specified config file: ./.github/configs/$CONFIG_TYPE/$CONFIG_FILE"
+              echo "repos<<EOF" >> $GITHUB_OUTPUT
+              jq -s '[.[]]' "./.github/configs/$CONFIG_TYPE/$CONFIG_FILE" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+            else
+              echo "ERROR: Specified config file './.github/configs/$CONFIG_TYPE/$CONFIG_FILE' does not exist!" >&2
+              exit 1
+            fi
+          else
+            # No config_file specified
+            echo "No config_file input provided."
+
+            if [[ -n "$CONFIG_MODE" ]]; then
+              echo "Using only files starting with 'ksun-' in .github/configs/$CONFIG_TYPE/"
+              FILES=$(find ".github/configs/$CONFIG_TYPE" -type f -name '$CONFIG_MODE-*.json')
+            else
+              echo "Using all JSON files in .github/configs/$CONFIG_TYPE/"
+              FILES=$(find ".github/configs/$CONFIG_TYPE" -type f -name '*.json')
+            fi
+
+            if [ -z "$FILES" ]; then
+              echo "ERROR: No matching JSON config files found!" >&2
+              exit 1
+            fi
+
+            echo "repos<<EOF" >> $GITHUB_OUTPUT
+            jq -s '[.[][]]' $FILES >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+
       - name: "Generate Matrix from config"
         id: generate-matrix
         run: |
