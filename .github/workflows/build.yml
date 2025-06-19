@@ -100,7 +100,6 @@ jobs:
 
       builddate: "${{ needs.Set-repos.outputs.builddate }}"
       fileName: ${{ matrix.repos.name }}
-      ogImageLink: ${{ matrix.repos.image.imageurl }}
 
       KERNEL_NAME: ${{ matrix.repos.kernelSource.name }}
       KERNEL_REPO: ${{ matrix.repos.kernelSource.repo }}
@@ -119,7 +118,10 @@ jobs:
       useKernelPatch: ${{ matrix.repos.kp.use }}
       kpKpimgLink: ${{ matrix.repos.kp.kpimg_link }}
       useAnykernel: ${{ matrix.repos.AnyKernel3.use }}
+
       useImage: ${{ matrix.repos.image.use }}
+      ogImageLink: ${{ matrix.repos.image.imageUrl }}
+      ogImageName: ${{ matrix.repos.image.imageName }}
 
       ccache: ${{ matrix.repos.ccache }}
       release: ${{ matrix.repos.AnyKernel3.release }}
@@ -353,10 +355,10 @@ jobs:
           mkdir wrap_kernel
           cd wrap_kernel
           curl -L -O ${{ env.ogImageLink }}
-          ../magiskboot_x86 unpack og-apatch.img
+          ../magiskboot_x86 unpack ${{ env.imageName }}
           rm -rf ./kernel
           mv ../out_kernel/Image ./kernel
-          ../magiskboot_x86 repack og-apatch.img
+          ../magiskboot_x86 repack ${{ env.imageName }}
           cd ..
           cp -f ./wrap_kernel/new-boot.img ./out_kernel/image-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img
       - name: "Upload image"
