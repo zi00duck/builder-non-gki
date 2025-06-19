@@ -3,7 +3,7 @@
   "kernelSource": {
     "name": "mojito",
     "repo": "https://github.com/StarifyBuilder/mojito_krenol",
-    "branch": "15.0",
+    "branch": "master",
     "device": "mojito",
     "defconfig": "mojito_defconfig"
   },
