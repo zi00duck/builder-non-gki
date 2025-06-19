@@ -79,7 +79,7 @@ jobs:
             fi
 
             echo "repos<<EOF" >> $GITHUB_OUTPUT
-            jq -s '[.[][]]' $FILES >> $GITHUB_OUTPUT
+            jq -s '[.[]]' $FILES >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           fi
       - name: "Set builddate"
