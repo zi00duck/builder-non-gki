@@ -18,8 +18,9 @@ on:
         description: 'Choose a root solution, if this not empty, it will only build that specific type'
         required: false
         type: choice
-        default: ''
+        default: 'everything'
         options:
+          - everything
           - ksun
           - sukisu
           - vanilla
@@ -64,8 +65,8 @@ jobs:
             # No config_file specified
             echo "No config_file input provided."
 
-            if [[ -n "$CONFIG_MODE" ]]; then
-              echo "Using only files starting with 'ksun-' in .github/configs/$CONFIG_TYPE/"
+            if [[ "$CONFIG_MODE" != "everything" ]]; then
+              echo "Using only files starting with '$CONFIG_MODE-' in .github/configs/$CONFIG_TYPE/"
               FILES=$(find ".github/configs/$CONFIG_TYPE" -type f -name '$CONFIG_MODE-*.json')
             else
               echo "Using all JSON files in .github/configs/$CONFIG_TYPE/"
@@ -79,31 +80,6 @@ jobs:
 
             echo "repos<<EOF" >> $GITHUB_OUTPUT
             jq -s '[.[][]]' $FILES >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          fi
-
-      - name: "Generate Matrix from config"
-        id: generate-matrix
-        run: |
-          CONFIG_FILE="${{ github.event.inputs.config_file }}"
-          echo "Selected config file: '$CONFIG_FILE'"
-
-          if [ -n "$CONFIG_FILE" ]; then
-            # User provided config file, check if exists
-            if [ -f "./.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE" ]; then
-              echo "Using specified config file: ./.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE"
-              echo "repos<<EOF" >> $GITHUB_OUTPUT
-              jq -s '[.[]]' "./.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE" >> $GITHUB_OUTPUT
-              echo "EOF" >> $GITHUB_OUTPUT
-            else
-              echo "ERROR: Specified config file './.github/configs/${{ github.event.inputs.config_type }}/$CONFIG_FILE' does not exist!" >&2
-              exit 1
-            fi
-          else
-            # No file specified, use all files
-            echo "No config_file input provided. Using all .github/configs/${{ github.event.inputs.config_type }}/*.json files."
-            echo "repos<<EOF" >> $GITHUB_OUTPUT
-            jq -s '[.[]]' .github/configs/${{ github.event.inputs.config_type }}/*.json >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           fi
       - name: "Set builddate"
