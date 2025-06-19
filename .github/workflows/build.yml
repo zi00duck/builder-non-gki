@@ -18,7 +18,7 @@ on:
         description: 'Choose a root solution, if this not empty, it will only build that specific type'
         required: false
         type: choice
-        default: 'production'
+        default: ''
         options:
           - ksun
           - sukisu
