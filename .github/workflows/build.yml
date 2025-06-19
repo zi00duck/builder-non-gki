@@ -355,10 +355,10 @@ jobs:
           mkdir wrap_kernel
           cd wrap_kernel
           curl -L -O ${{ env.ogImageLink }}
-          ../magiskboot_x86 unpack ${{ env.imageName }}
+          ../magiskboot_x86 unpack ${{ env.ogImageName }}
           rm -rf ./kernel
           mv ../out_kernel/Image ./kernel
-          ../magiskboot_x86 repack ${{ env.imageName }}
+          ../magiskboot_x86 repack ${{ env.ogImageName }}
           cd ..
           cp -f ./wrap_kernel/new-boot.img ./out_kernel/image-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img
       - name: "Upload image"
