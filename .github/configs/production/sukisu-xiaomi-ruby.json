@@ -58,7 +58,7 @@
   "AnyKernel3": {
     "use": false,
     "release": true,
-    "repo": "https://github.com/wodanesdag/AnyKernel3/",
+    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
     "branch": "ruby"
   }
 }

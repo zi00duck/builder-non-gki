@@ -54,7 +54,7 @@
   "AnyKernel3": {
     "use": true,
     "release": true,
-    "repo": "https://github.com/raystef66/AnyKernel",
+    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
     "branch": "cepheus"
   },
   "image": {

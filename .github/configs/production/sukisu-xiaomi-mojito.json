@@ -1,11 +1,11 @@
 {
   "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "cepheus",
-    "repo": "https://github.com/StarifyBuilder/android_kernel_xiaomi_cepheus",
+    "name": "mojito",
+    "repo": "https://github.com/StarifyBuilder/mojito_krenol",
     "branch": "15.0",
-    "device": "cepheus",
-    "defconfig": "sweet_defconfig"
+    "device": "mojito",
+    "defconfig": "mojito_defconfig"
   },
   "kp": {
     "use": true,
@@ -54,8 +54,8 @@
   "AnyKernel3": {
     "use": true,
     "release": true,
-    "repo": "https://github.com/raystef66/AnyKernel",
-    "branch": "cepheus"
+    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
+    "branch": "mojito"
   },
   "image": {
     "use": false,

@@ -54,8 +54,8 @@
   "AnyKernel3": {
     "use": true,
     "release": true,
-    "repo": "https://github.com/VenturX/AnyKernel3",
-    "branch": "master"
+    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
+    "branch": "sweet"
   },
   "image": {
     "use": false,
