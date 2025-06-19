@@ -53,7 +53,8 @@
   },
   "image": {
     "use": true,
-    "imageurl": "https://github.com/RainyXeon/MoonWake/releases/download/cloud/og-apatch.img"
+    "imageUrl": "https://github.com/RainyXeon/MoonWake/releases/download/cloud/og-apatch.img",
+    "imageName": "og-apatch.img"
   },
   "AnyKernel3": {
     "use": false,
