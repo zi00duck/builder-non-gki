@@ -2,17 +2,17 @@
   "name": "sukisu-ultra",
   "kernelSource": {
     "name": "mojito",
-    "repo": "https://github.com/StarifyBuilder/mojito_krenol",
-    "branch": "master",
+    "repo": "https://github.com/StarifyBuilder/android_kernel_xiaomi_mojito",
+    "branch": "a11/main",
     "device": "mojito",
-    "defconfig": "mojito_defconfig"
+    "defconfig": "vendor/mojito_defconfig"
   },
   "kp": {
-    "use": true,
+    "use": false,
     "kpimg_link": "https://github.com/SukiSU-Ultra/SukiSU_KernelPatch_patch/releases/download/0.12.0/kpimg"
   },
   "kernelsu": {
-    "enable": true,
+    "enable": false,
     "setupLink": "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh",
     "setupArg": "susfs-main",
     "setupName": "KernelSU",
