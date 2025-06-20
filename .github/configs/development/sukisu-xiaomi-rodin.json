@@ -5,7 +5,7 @@
     "repo": "https://github.com/StarifyBuilder/kernel_xiaomi_mt6899",
     "branch": "v-oss",
     "device": "rodin",
-    "defconfig": "old_ksun_defconfig"
+    "defconfig": "rodin_defconfig"
   },
   "kp": {
     "use": false,
