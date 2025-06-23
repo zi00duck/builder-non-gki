@@ -8,7 +8,7 @@
     "defconfig": "vendor/pipa_user_defconfig"
   },
   "kp": {
-    "use": true,
+    "use": false,
     "kpimg_link": "https://github.com/SukiSU-Ultra/SukiSU_KernelPatch_patch/releases/download/0.12.0/kpimg"
   },
   "kernelsu": {
