@@ -2,10 +2,10 @@
   "name": "sukisu-ultra",
   "kernelSource": {
     "name": "mojito",
-    "repo": "https://github.com/StarifyBuilder/android_kernel_xiaomi_mojito",
-    "branch": "a11/main",
+    "repo": "https://github.com/xiaomi-sdm678/android_kernel_xiaomi_mojito",
+    "branch": "15",
     "device": "mojito",
-    "defconfig": "vendor/mojito_defconfig"
+    "defconfig": "mojito_defconfig"
   },
   "kp": {
     "use": false,
