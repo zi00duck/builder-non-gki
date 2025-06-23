@@ -1,11 +1,11 @@
 {
   "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "mojito",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_mojito",
-    "branch": "ksu",
-    "device": "mojito",
-    "defconfig": "mojito_defconfig"
+    "name": "pipa",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_pipa",
+    "branch": "master",
+    "device": "pipa",
+    "defconfig": "vendor/pipa_user_defconfig"
   },
   "kp": {
     "use": true,
@@ -55,7 +55,7 @@
     "use": true,
     "release": true,
     "repo": "https://github.com/kernel-build-from-rainyland/AnyKernel3",
-    "branch": "mojito"
+    "branch": "pipa"
   },
   "image": {
     "use": false,
