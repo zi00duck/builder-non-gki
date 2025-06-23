@@ -2,7 +2,7 @@
   "name": "sukisu-ultra",
   "kernelSource": {
     "name": "rodin",
-    "repo": "https://github.com/StarifyBuilder/kernel_xiaomi_mt6899",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_mt6899",
     "branch": "v-oss",
     "device": "rodin",
     "defconfig": "gki_defconfig"
@@ -53,7 +53,7 @@
   },
   "image": {
     "use": true,
-    "imageUrl": "https://github.com/StarifyBuilder/StarifyBuilder/releases/download/cloud/rodin-original-boot.img",
+    "imageUrl": "https://github.com/kernel-build-from-rainyland/StarifyBuilder/releases/download/cloud/rodin-original-boot.img",
     "imageName": "rodin-original-boot.img"
   },
   "AnyKernel3": {

@@ -54,7 +54,7 @@
   "AnyKernel3": {
     "use": true,
     "release": true,
-    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
+    "repo": "https://github.com/kernel-build-from-rainyland/AnyKernel3",
     "branch": "sweet"
   },
   "image": {

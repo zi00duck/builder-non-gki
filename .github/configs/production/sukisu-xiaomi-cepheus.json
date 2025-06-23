@@ -2,7 +2,7 @@
   "name": "sukisu-ultra",
   "kernelSource": {
     "name": "cepheus",
-    "repo": "https://github.com/StarifyBuilder/android_kernel_xiaomi_cepheus",
+    "repo": "https://github.com/kernel-build-from-rainyland/android_kernel_xiaomi_cepheus",
     "branch": "15.0",
     "device": "cepheus",
     "defconfig": "cepheus_defconfig"
@@ -54,7 +54,7 @@
   "AnyKernel3": {
     "use": true,
     "release": true,
-    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
+    "repo": "https://github.com/kernel-build-from-rainyland/AnyKernel3",
     "branch": "cepheus"
   },
   "image": {

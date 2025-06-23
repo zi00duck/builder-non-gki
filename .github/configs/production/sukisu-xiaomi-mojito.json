@@ -3,7 +3,7 @@
   "kernelSource": {
     "name": "mojito",
     "repo": "https://github.com/xiaomi-sdm678/android_kernel_xiaomi_mojito",
-    "branch": "15",
+    "branch": "ksu",
     "device": "mojito",
     "defconfig": "mojito_defconfig"
   },
@@ -12,7 +12,7 @@
     "kpimg_link": "https://github.com/SukiSU-Ultra/SukiSU_KernelPatch_patch/releases/download/0.12.0/kpimg"
   },
   "kernelsu": {
-    "enable": false,
+    "enable": true,
     "setupLink": "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh",
     "setupArg": "susfs-main",
     "setupName": "KernelSU",
@@ -54,7 +54,7 @@
   "AnyKernel3": {
     "use": true,
     "release": true,
-    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
+    "repo": "https://github.com/kernel-build-from-rainyland/AnyKernel3",
     "branch": "mojito"
   },
   "image": {

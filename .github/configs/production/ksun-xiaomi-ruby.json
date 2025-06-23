@@ -2,7 +2,7 @@
   "name": "moonwake-kernelsu-next",
   "kernelSource": {
     "name": "ruby",
-    "repo": "https://github.com/RainyXeon/MoonWake",
+    "repo": "https://github.com/kernel-build-from-rainyland/MoonWake",
     "branch": "ksu-type-root-impl",
     "device": "ruby",
     "defconfig": "ruby_defconfig"
@@ -53,13 +53,13 @@
   },
   "image": {
     "use": true,
-    "imageUrl": "https://github.com/RainyXeon/MoonWake/releases/download/cloud/og-apatch.img",
-    "imageName": "og-apatch.img"
+    "imageUrl": "https://github.com/kernel-build-from-rainyland/MoonWake/releases/download/cloud/boot.img",
+    "imageName": "boot.img"
   },
   "AnyKernel3": {
     "use": false,
     "release": true,
-    "repo": "https://github.com/StarifyBuilder/AnyKernel3",
+    "repo": "https://github.com/kernel-build-from-rainyland/AnyKernel3",
     "branch": "ruby"
   }
 }
