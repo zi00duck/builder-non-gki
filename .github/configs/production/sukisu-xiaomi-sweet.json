@@ -2,7 +2,7 @@
   "name": "sukisu-ultra",
   "kernelSource": {
     "name": "sweet",
-    "repo": "https://github.com/gnadgnaoh/kernel_xiaomi_sm6150",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm6150",
     "branch": "fifteen-ln8000",
     "device": "sweet",
     "defconfig": "sweet_defconfig"

@@ -2,7 +2,7 @@
   "name": "sukisu-ultra",
   "kernelSource": {
     "name": "cepheus",
-    "repo": "https://github.com/kernel-build-from-rainyland/android_kernel_xiaomi_cepheus",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_cepheus",
     "branch": "15.0",
     "device": "cepheus",
     "defconfig": "cepheus_defconfig"

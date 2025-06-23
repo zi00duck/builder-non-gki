@@ -2,7 +2,7 @@
   "name": "moonwake-vanilla",
   "kernelSource": {
     "name": "ruby",
-    "repo": "https://github.com/kernel-build-from-rainyland/MoonWake",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_ruby",
     "branch": "main",
     "device": "ruby",
     "defconfig": "ruby_defconfig"
@@ -53,7 +53,7 @@
   },
   "image": {
     "use": true,
-    "imageUrl": "https://github.com/kernel-build-from-rainyland/MoonWake/releases/download/cloud/boot.img",
+    "imageUrl": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_ruby/releases/download/cloud/boot.img",
     "imageName": "boot.img"
   },
   "AnyKernel3": {

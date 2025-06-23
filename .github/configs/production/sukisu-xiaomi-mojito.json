@@ -2,7 +2,7 @@
   "name": "sukisu-ultra",
   "kernelSource": {
     "name": "mojito",
-    "repo": "https://github.com/xiaomi-sdm678/android_kernel_xiaomi_mojito",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_mojito",
     "branch": "ksu",
     "device": "mojito",
     "defconfig": "mojito_defconfig"
