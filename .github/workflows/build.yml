@@ -302,9 +302,6 @@ jobs:
           if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image" ]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz ./out_kernel/
-          fi
           if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo" ]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo ./out_kernel/
           fi
@@ -331,28 +328,13 @@ jobs:
           fi
           ./kptools-linux -p -s "RainyPatch@111" -i ../out_kernel/Image -k kpimg -o ./oImage
           rm -rf ../out_kernel/Image
-          rm -rf ../out_kernel/Image.gz
-          gzip -c ./oImage > ./Image.gz
           mv ./oImage ../out_kernel/Image
-          mv ./Image.gz ../out_kernel/Image.gz
       - name: "Pack AnyKernel3.zip"
         if: ${{ env.useAnykernel == 'true' }}
         run: |
           ls -al
           cp -f -r ./out_kernel/. ./AnyKernel3/
           cd AnyKernel3/
-          if [ -e "./Image.gz-dtb" ]; then
-            rm -rf ./Image.gz
-            rm -rf ./Image
-          fi
-          if [ -e "./Image.gz" ]; then
-            rm -rf ./Image.gz-dtb
-            rm -rf ./Image
-          fi
-          if [ -e "./Image" ]; then
-            rm -rf ./Image.gz
-            rm -rf ./Image.gz-dtb
-          fi
           zip -q -r "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
       - name: "Upload AnyKernel3 image"
         uses: actions/upload-artifact@v4
