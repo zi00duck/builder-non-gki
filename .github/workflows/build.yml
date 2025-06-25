@@ -298,6 +298,7 @@ jobs:
         run: |
           ls -al
           mkdir out_kernel
+          ls -al ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot
           if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image" ]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
@@ -316,6 +317,7 @@ jobs:
           if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb" ]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb ./out_kernel/
           fi
+          ls ./out_kernel/
       - name: "Patch with kernel patch"
         if: ${{ env.useKernelPatch == 'true' }}
         run: |
@@ -339,7 +341,18 @@ jobs:
           ls -al
           cp -f -r ./out_kernel/. ./AnyKernel3/
           cd AnyKernel3/
-          rm -rf ./Image
+          if [ -e "./Image.gz-dtb" ]; then
+            rm -rf ./Image.gz
+            rm -rf ./Image
+          fi
+          if [ -e "./Image.gz" ]; then
+            rm -rf ./Image.gz-dtb
+            rm -rf ./Image
+          fi
+          if [ -e "./Image" ]; then
+            rm -rf ./Image.gz
+            rm -rf ./Image.gz-dtb
+          fi
           zip -q -r "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
       - name: "Upload AnyKernel3 image"
         uses: actions/upload-artifact@v4
