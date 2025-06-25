@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "enuma",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
-    "branch": "master",
     "device": "enuma",
-    "defconfig": "enuma_defconfig"
+    "name": "sukisu-ultra",
+    "defconfig": "enuma_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
+    "branch": "master"
   },
   "kp": {
     "use": false,

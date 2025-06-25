@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "apollo",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
-    "branch": "master",
     "device": "apollo",
-    "defconfig": "apollo_defconfig"
+    "name": "sukisu-ultra",
+    "defconfig": "apollo_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
+    "branch": "master"
   },
   "kp": {
     "use": false,

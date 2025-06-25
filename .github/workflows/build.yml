@@ -99,13 +99,13 @@ jobs:
       WORKSPACE: ${{ github.workspace }}
 
       builddate: "${{ needs.Set-repos.outputs.builddate }}"
-      fileName: ${{ matrix.repos.name }}
 
       KERNEL_NAME: ${{ matrix.repos.kernelSource.name }}
       KERNEL_REPO: ${{ matrix.repos.kernelSource.repo }}
       KERNEL_BRANCH: ${{ matrix.repos.kernelSource.branch }}
       KERNEL_DEVICE: ${{ matrix.repos.kernelSource.device }}
 
+      EXTRA_CONFIG_NAME: ${{ matrix.repos.kernelSource.extraConfig }}
       DEFCONFIG_NAME: ${{ matrix.repos.kernelSource.defconfig }}
 
       kernelSU: ${{ matrix.repos.kernelsu.enable }}
@@ -283,8 +283,23 @@ jobs:
           args: ${{ steps.generate-args.outputs.args }}
           arch: ${{ steps.generate-args.outputs.ARCH }}
         run: |
-          echo "PATH Variable: $PATH"
-          make ${{ env.args }} ${{ env.DEFCONFIG_NAME }}
+          if [[ -n "${{ env.EXTRA_CONFIG_NAME }}" ]]; then
+            make ${{ env.DEFCONFIG_NAME }}
+            mv .config prebuilt_gki.config
+
+            cp ./arch/$ARCH/configs/${{ env.EXTRA_CONFIG_NAME }} .config
+            make olddefconfig
+            mv .config vendor.config
+
+            # Step 3: Merge and finalize into .config
+            cat prebuilt_gki.config vendor.config | awk '!/^#/ && NF { conf[$1]=$0 } END { for (k in conf) print conf[k] }' > .config
+
+            # Step 4: Final pass to resolve dependencies
+            make olddefconfig
+          else
+            echo "PATH Variable: $PATH"
+            make ${{ env.args }} ${{ env.DEFCONFIG_NAME }}
+          fi
       - name: "Build kernel"
         working-directory: ${{ env.KERNEL_NAME }}
         env:
@@ -323,13 +338,16 @@ jobs:
           ls -al
           cp -f -r ./out_kernel/. ./AnyKernel3/
           cd AnyKernel3/
-          zip -q -r "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
+          mv ./Image ./PreImage
+          gzip -c ./PreImage > ./Image.gz
+          rm -rf ./PreImage
+          zip -q -r "anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
       - name: "Upload AnyKernel3 image"
         uses: actions/upload-artifact@v4
         if: ${{ env.useAnykernel == 'true' }}
         with:
-          name: "anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
-          path: ./AnyKernel3/anykernel-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.zip
+          name: "anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
+          path: ./AnyKernel3/anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.zip
       - name: "Pack kernel image"
         if: ${{ env.useImage == 'true' }}
         run: | 
@@ -343,10 +361,10 @@ jobs:
           mv ../out_kernel/Image ./kernel
           ../magiskboot_x86 repack ${{ env.ogImageName }}
           cd ..
-          cp -f ./wrap_kernel/new-boot.img ./out_kernel/image-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img
+          cp -f ./wrap_kernel/new-boot.img ./out_kernel/image-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img
       - name: "Upload image"
         if: ${{ env.useImage == 'true' }}
         uses: actions/upload-artifact@v4
         with:
-          name: "image-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
-          path: "out_kernel/image-${{ env.fileName }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img"
+          name: "image-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
+          path: "out_kernel/image-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img"

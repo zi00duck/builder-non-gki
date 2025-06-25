@@ -1,11 +1,11 @@
 {
-  "name": "kernelsu-next",
   "kernelSource": {
-    "name": "sweet",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm6150",
-    "branch": "fifteen-ln8000",
     "device": "sweet",
-    "defconfig": "sweet_defconfig"
+    "name": "sukisu-ultra",
+    "defconfig": "sweet_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm6150",
+    "branch": "fifteen-ln8000"
   },
   "kp": {
     "use": false,

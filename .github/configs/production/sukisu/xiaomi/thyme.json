@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "thyme",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
-    "branch": "master",
     "device": "thyme",
-    "defconfig": "thyme_defconfig"
+    "name": "sukisu-ultra",
+    "defconfig": "thyme_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
+    "branch": "master"
   },
   "kp": {
     "use": false,

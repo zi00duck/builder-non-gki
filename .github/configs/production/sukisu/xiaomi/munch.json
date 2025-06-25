@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "munch",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
-    "branch": "master",
     "device": "munch",
-    "defconfig": "munch_defconfig"
+    "name": "sukisu-ultra",
+    "defconfig": "munch_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
+    "branch": "master"
   },
   "kp": {
     "use": false,

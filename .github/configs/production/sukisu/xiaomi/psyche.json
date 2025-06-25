@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "psyche",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
-    "branch": "master",
     "device": "psyche",
-    "defconfig": "psyche_defconfig"
+    "name": "sukisu-ultra",
+    "defconfig": "psyche_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8250_family",
+    "branch": "master"
   },
   "kp": {
     "use": false,

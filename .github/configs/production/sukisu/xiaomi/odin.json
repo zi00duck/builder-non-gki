@@ -1,11 +1,11 @@
 {
   "kernelSource": {
-    "device": "phoenix",
+    "device": "odin",
     "name": "sukisu-ultra",
-    "defconfig": "phoenix_defconfig",
-    "extraConfig": "",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_phoenix",
-    "branch": "R"
+    "defconfig": "gki_defconfig",
+    "extraConfig": "vendor/odin_QGKI.config",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8350_family",
+    "branch": "15"
   },
   "kp": {
     "use": false,
@@ -21,7 +21,7 @@
   },
   "toolchains": [
     {
-      "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android11-release/clang-r377782c.tar.gz",
+      "url": "https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r547379.tar.gz",
       "branch": "15.0",
       "name": "clang-AOSP",
       "binPath": ["./bin"]
@@ -55,7 +55,7 @@
     "use": true,
     "release": true,
     "repo": "https://github.com/kernel-build-from-rainyland/AnyKernel3",
-    "branch": "phoenix"
+    "branch": "odin"
   },
   "image": {
     "use": false,

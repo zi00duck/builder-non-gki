@@ -1,11 +1,11 @@
 {
-  "name": "moonwake-vanilla",
   "kernelSource": {
-    "name": "ruby",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_ruby",
-    "branch": "main",
     "device": "ruby",
-    "defconfig": "ruby_defconfig"
+    "name": "moonwake-vanilla",
+    "defconfig": "ruby_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_ruby",
+    "branch": "main"
   },
   "kp": {
     "use": false,

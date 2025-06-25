@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "mojito",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_mojito",
-    "branch": "ksu",
     "device": "mojito",
-    "defconfig": "mojito_defconfig"
+    "name": "sukisu-ultra",
+    "defconfig": "mojito_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_mojito",
+    "branch": "ksu"
   },
   "kp": {
     "use": true,

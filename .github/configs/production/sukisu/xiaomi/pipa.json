@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "pipa",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_pipa",
-    "branch": "master",
     "device": "pipa",
-    "defconfig": "vendor/pipa_user_defconfig"
+    "name": "sukisu-ultra",
+    "defconfig": "vendor/pipa_user_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_pipa",
+    "branch": "master"
   },
   "kp": {
     "use": false,

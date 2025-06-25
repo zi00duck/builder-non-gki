@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "venus",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8350_family",
-    "branch": "15",
     "device": "venus",
-    "defconfig": "vendor/venus_QGKI.config"
+    "name": "sukisu-ultra",
+    "defconfig": "gki_defconfig",
+    "extraConfig": "vendor/venus_QGKI.config",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8350_family",
+    "branch": "15"
   },
   "kp": {
     "use": false,

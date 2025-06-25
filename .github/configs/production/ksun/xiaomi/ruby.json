@@ -1,11 +1,11 @@
 {
-  "name": "moonwake-kernelsu-next",
   "kernelSource": {
-    "name": "ruby",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_ruby",
-    "branch": "ksu-type-root-impl",
     "device": "ruby",
-    "defconfig": "ruby_defconfig"
+    "name": "moonwake-kernelsu-next",
+    "defconfig": "ruby_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_ruby",
+    "branch": "ksu-type-root-impl"
   },
   "kp": {
     "use": false,

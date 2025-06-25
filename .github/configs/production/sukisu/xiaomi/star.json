@@ -1,11 +1,11 @@
 {
-  "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "star",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8350_family",
-    "branch": "15",
     "device": "star",
-    "defconfig": "vendor/star_QGKI.config"
+    "name": "sukisu-ultra",
+    "defconfig": "gki_defconfig",
+    "extraConfig": "vendor/star_QGKI.config",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8350_family",
+    "branch": "15"
   },
   "kp": {
     "use": false,
