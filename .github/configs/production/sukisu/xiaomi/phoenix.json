@@ -1,11 +1,11 @@
 {
   "name": "sukisu-ultra",
   "kernelSource": {
-    "name": "dagu",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_dagu",
-    "branch": "master",
-    "device": "dagu",
-    "defconfig": "vendor/dagu_user_defconfig"
+    "name": "phoenix",
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_phoenix",
+    "branch": "R",
+    "device": "phoenix",
+    "defconfig": "phoenix_defconfig"
   },
   "kp": {
     "use": false,
@@ -55,7 +55,7 @@
     "use": true,
     "release": true,
     "repo": "https://github.com/kernel-build-from-rainyland/AnyKernel3",
-    "branch": "dagu"
+    "branch": "phoenix"
   },
   "image": {
     "use": false,
