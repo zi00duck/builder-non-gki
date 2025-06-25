@@ -291,7 +291,7 @@ jobs:
           args: ${{ steps.generate-args.outputs.args }}
         run: |
           echo "PATH Variable: $PATH"
-          make ${{ env.args }}
+          make KCFLAGS="-O2" ${{ env.args }}
       - name: "Push to out_kernel folder and download ramdisk"
         env:
           arch: ${{ steps.generate-args.outputs.ARCH }}
