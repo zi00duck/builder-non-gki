@@ -284,18 +284,8 @@ jobs:
           arch: ${{ steps.generate-args.outputs.ARCH }}
         run: |
           if [[ -n "${{ env.EXTRA_CONFIG_NAME }}" ]]; then
-            make ${{ env.DEFCONFIG_NAME }}
-            mv .config prebuilt_gki.config
-
-            cp ./arch/$ARCH/configs/${{ env.EXTRA_CONFIG_NAME }} .config
-            make olddefconfig
-            mv .config vendor.config
-
-            # Step 3: Merge and finalize into .config
-            cat prebuilt_gki.config vendor.config | awk '!/^#/ && NF { conf[$1]=$0 } END { for (k in conf) print conf[k] }' > .config
-
-            # Step 4: Final pass to resolve dependencies
-            make olddefconfig
+            make ${{ env.args }} ${{ env.DEFCONFIG_NAME }}
+            make ${{ env.args }} ${{ env.EXTRA_CONFIG_NAME }}
           else
             echo "PATH Variable: $PATH"
             make ${{ env.args }} ${{ env.DEFCONFIG_NAME }}
