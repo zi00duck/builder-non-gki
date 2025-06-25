@@ -302,18 +302,6 @@ jobs:
           if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image" ]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo ./out_kernel/
-          fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo.img" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtbo.img ./out_kernel/
-          fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb.img" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb.img ./out_kernel/
-          fi
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb" ]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/dtb ./out_kernel/
-          fi
           ls ./out_kernel/
       - name: "Patch with kernel patch"
         if: ${{ env.useKernelPatch == 'true' }}
