@@ -205,7 +205,7 @@ Fork repo <https://github.com/kernel-build-from-rainyland/builder-non-gki> (Like
 
 Type `<device_manufacture>/<device_codename.json>` on name your file field (It will automatically create a folder for this so don't worry)
 
-Use this config template below
+Use this config template below (remove the comments before continue)
 
 ```json
 {
