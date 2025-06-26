@@ -3,8 +3,8 @@
     "device": "haydn",
     "vendor": "xiaomi",
     "name": "sukisu-ultra",
-    "defconfig": "gki_defconfig",
-    "extraConfig": "vendor/haydn_QGKI.config",
+    "defconfig": "haydn_defconfig",
+    "extraConfig": "",
     "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8350_family",
     "branch": "15"
   },

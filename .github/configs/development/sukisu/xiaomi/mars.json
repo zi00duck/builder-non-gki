@@ -3,8 +3,8 @@
     "device": "mars",
     "vendor": "xiaomi",
     "name": "sukisu-ultra",
-    "defconfig": "gki_defconfig",
-    "extraConfig": "vendor/mars_QGKI.config",
+    "defconfig": "mars_defconfig",
+    "extraConfig": "",
     "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm8350_family",
     "branch": "15"
   },
