@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "thyme",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "thyme_defconfig",
     "extraConfig": "",

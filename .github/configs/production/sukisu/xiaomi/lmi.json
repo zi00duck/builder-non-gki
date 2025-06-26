@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "lmi",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "lmi_defconfig",
     "extraConfig": "",

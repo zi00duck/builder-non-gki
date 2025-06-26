@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "mojito",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "mojito_defconfig",
     "extraConfig": "",

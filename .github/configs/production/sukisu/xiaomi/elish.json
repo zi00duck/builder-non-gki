@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "elish",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "elish_defconfig",
     "extraConfig": "",

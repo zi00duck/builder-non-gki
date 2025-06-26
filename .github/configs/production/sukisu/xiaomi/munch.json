@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "munch",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "munch_defconfig",
     "extraConfig": "",

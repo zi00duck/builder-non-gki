@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "pipa",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "vendor/pipa_user_defconfig",
     "extraConfig": "",

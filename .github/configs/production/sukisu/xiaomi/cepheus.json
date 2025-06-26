@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "cepheus",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "cepheus_defconfig",
     "extraConfig": "",

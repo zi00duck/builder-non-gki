@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "haydn",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "gki_defconfig",
     "extraConfig": "vendor/haydn_QGKI.config",

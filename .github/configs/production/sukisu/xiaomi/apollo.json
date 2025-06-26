@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "apollo",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "apollo_defconfig",
     "extraConfig": "",

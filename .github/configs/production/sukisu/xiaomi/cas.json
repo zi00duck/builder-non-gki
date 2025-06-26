@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "cas",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "cas_defconfig",
     "extraConfig": "",

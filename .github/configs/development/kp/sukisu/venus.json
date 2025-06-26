@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "venus",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "gki_defconfig",
     "extraConfig": "vendor/venus_QGKI.config",

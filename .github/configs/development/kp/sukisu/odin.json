@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "odin",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "gki_defconfig",
     "extraConfig": "vendor/odin_QGKI.config",

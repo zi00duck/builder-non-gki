@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "psyche",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "psyche_defconfig",
     "extraConfig": "",

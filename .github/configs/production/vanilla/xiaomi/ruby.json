@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "ruby",
+    "vendor": "xiaomi",
     "name": "moonwake-vanilla",
     "defconfig": "ruby_defconfig",
     "extraConfig": "",

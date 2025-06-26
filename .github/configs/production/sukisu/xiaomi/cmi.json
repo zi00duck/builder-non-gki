@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "cmi",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "cmi_defconfig",
     "extraConfig": "",

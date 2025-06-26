@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "alioth",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "alioth_defconfig",
     "extraConfig": "",

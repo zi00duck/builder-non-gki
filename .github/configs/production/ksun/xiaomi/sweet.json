@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "sweet",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "sweet_defconfig",
     "extraConfig": "",

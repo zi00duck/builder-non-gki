@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "mars",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "gki_defconfig",
     "extraConfig": "vendor/mars_QGKI.config",

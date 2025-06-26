@@ -104,6 +104,7 @@ jobs:
       KERNEL_REPO: ${{ matrix.repos.kernelSource.repo }}
       KERNEL_BRANCH: ${{ matrix.repos.kernelSource.branch }}
       KERNEL_DEVICE: ${{ matrix.repos.kernelSource.device }}
+      KERNEL_DEVICE_VENDOR: ${{ matrix.repos.kernelSource.vendor }}
 
       EXTRA_CONFIG_NAME: ${{ matrix.repos.kernelSource.extraConfig }}
       DEFCONFIG_NAME: ${{ matrix.repos.kernelSource.defconfig }}
@@ -157,9 +158,9 @@ jobs:
           path: |
             ~/.ccache
             ${{ env.OUT_DIR }}
-          key: ccache-${{ env.KERNEL_NAME }}-${{ steps.ccache_key.outputs.CACHE_KEY }}-${{ env.builddate }}
+          key: ccache-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_NAME }}-${{ steps.ccache_key.outputs.CACHE_KEY }}-${{ env.builddate }}
           restore-keys: |
-            ccache-${{ env.KERNEL_NAME }}-${{ steps.ccache_key.outputs.CACHE_KEY }}-${{ env.builddate }}
+            ccache-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_NAME }}-${{ steps.ccache_key.outputs.CACHE_KEY }}-${{ env.builddate }}
       - name: "Setup Anykernel3"
         if: ${{ env.useAnykernel == 'true' }}
         env:
@@ -331,13 +332,13 @@ jobs:
           mv ./Image ./PreImage
           gzip -c ./PreImage > ./Image.gz
           rm -rf ./PreImage
-          zip -q -r "anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
+          zip -q -r "anykernel-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
       - name: "Upload AnyKernel3 image"
         uses: actions/upload-artifact@v4
         if: ${{ env.useAnykernel == 'true' }}
         with:
-          name: "anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
-          path: ./AnyKernel3/anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.zip
+          name: "anykernel-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
+          path: ./AnyKernel3/anykernel-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.zip
       - name: "Pack kernel image"
         if: ${{ env.useImage == 'true' }}
         run: | 
@@ -351,10 +352,10 @@ jobs:
           mv ../out_kernel/Image ./kernel
           ../magiskboot_x86 repack ${{ env.ogImageName }}
           cd ..
-          cp -f ./wrap_kernel/new-boot.img ./out_kernel/image-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img
+          cp -f ./wrap_kernel/new-boot.img ./out_kernel/image-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img
       - name: "Upload image"
         if: ${{ env.useImage == 'true' }}
         uses: actions/upload-artifact@v4
         with:
-          name: "image-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
-          path: "out_kernel/image-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img"
+          name: "image-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
+          path: "out_kernel/image-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img"

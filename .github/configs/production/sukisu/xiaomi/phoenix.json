@@ -1,6 +1,7 @@
 {
   "kernelSource": {
     "device": "phoenix",
+    "vendor": "xiaomi",
     "name": "sukisu-ultra",
     "defconfig": "phoenix_defconfig",
     "extraConfig": "",
