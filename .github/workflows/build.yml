@@ -313,7 +313,7 @@ jobs:
           fi
           ls ./out_kernel/
       - name: "Patch with kernel patch"
-        if: ${{ env.useKernelPatch == 'true' && ${{ env.use_dtb }} != 'true' }}
+        if: ${{ env.useKernelPatch == 'true' && env.use_dtb != 'true' }}
         run: |
           mkdir kernel_patch_processing
           cd kernel_patch_processing
