@@ -308,7 +308,8 @@ jobs:
           ls -al ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot
           if [[ "${{ env.use_dtb }}" == "true" ]]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel
-            gunzip Image.gz-dtb
+            mv Image.gz-dtb Image.gz
+            gunzip Image.gz
           else
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
