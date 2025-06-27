@@ -308,16 +308,12 @@ jobs:
           ls -al ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot
           if [[ "${{ env.use_dtb }}" == "true" ]]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel
-            cd out_kernel
-            mv ./Image.gz-dtb ./Image.gz
-            gunzip Image.gz
-            cd ..
           else
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
           ls ./out_kernel/
       - name: "Patch with kernel patch"
-        if: ${{ env.useKernelPatch == 'true' }}
+        if: ${{ env.useKernelPatch == 'true' && ${{ env.use_dtb }} != 'true' }}
         run: |
           mkdir kernel_patch_processing
           cd kernel_patch_processing
