@@ -307,9 +307,8 @@ jobs:
           mkdir out_kernel
           ls -al ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot
           if [[ "${{ env.use_dtb }}" == "true" ]]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel/
-            gzip -d < "Image.gz-dtb" > "Image"
-            rm -rf ./Image.gz-dtb
+            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel
+            gunzip Image.gz-dtb
           else
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
