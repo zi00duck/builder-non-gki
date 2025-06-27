@@ -99,6 +99,7 @@ jobs:
       WORKSPACE: ${{ github.workspace }}
 
       builddate: "${{ needs.Set-repos.outputs.builddate }}"
+      use_dtb: ${{ matrix.repos.use_dtb }}
 
       KERNEL_NAME: ${{ matrix.repos.kernelSource.name }}
       KERNEL_REPO: ${{ matrix.repos.kernelSource.repo }}
@@ -305,7 +306,11 @@ jobs:
           ls -al
           mkdir out_kernel
           ls -al ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot
-          if [ -e "${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image" ]; then
+          if [[ "${{ env.use_dtb }}" == "true" ]]; then
+            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel/
+            gzip -d < "Image.gz-dtb" > "Image"
+            rm -rf ./Image.gz-dtb
+          else
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
           ls ./out_kernel/
@@ -329,9 +334,15 @@ jobs:
           ls -al
           cp -f -r ./out_kernel/. ./AnyKernel3/
           cd AnyKernel3/
-          mv ./Image ./PreImage
-          gzip -c ./PreImage > ./Image.gz
-          rm -rf ./PreImage
+          if [[ "${{ env.use_dtb }}" == "true" ]]; then
+            mv ./Image ./PreImage
+            gzip -c ./PreImage > ./Image.gz-dtb
+            rm -rf ./PreImage
+          else
+            mv ./Image ./PreImage
+            gzip -c ./PreImage > ./Image.gz
+            rm -rf ./PreImage
+          fi
           zip -q -r "anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
       - name: "Upload AnyKernel3 image"
         uses: actions/upload-artifact@v4

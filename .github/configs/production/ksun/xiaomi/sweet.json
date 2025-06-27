@@ -8,6 +8,7 @@
     "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm6150",
     "branch": "fifteen-ln8000"
   },
+  "use_dtb": false,
   "kp": {
     "use": false,
     "kpimg_link": ""

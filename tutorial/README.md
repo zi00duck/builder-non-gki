@@ -218,6 +218,7 @@ Use this config template below (remove the comments before continue)
     "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_ruby", // the kernel source link you forked and modified
     "branch": "ksu-type-root-impl" // the branch if the kernel source forked and modified. Open kernel source link again and see the button below kernel source name, you will see the branch you modified
   },
+  "use_dtb": false,
   "kp": {
     "use": false, // If you don't use kernel patch (APatch) leave this alone
     "kpimg_link": "" // If you don't use kernel patch (APatch) leave this alone
