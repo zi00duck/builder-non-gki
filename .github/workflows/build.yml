@@ -308,12 +308,22 @@ jobs:
           ls -al ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot
           if [[ "${{ env.use_dtb }}" == "true" ]]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel
+            cd out_kernel
+            gzip_len=$(gzip -l Image.gz-dtb | awk 'NR==2 {print $2}')
+            dd if=Image.gz-dtb of=Image.gz bs=1 skip=0 count=$gzip_len
+            dd if=Image.gz-dtb of=dtb bs=1 skip=$gzip_len
+            gunzip -c Image.gz > Image
+            rm -rf ./Image.gz
+            rm -rf ./Image.gz-dtb
+            # Output here should be Image and dtb only
+            ls
+            cd ..
           else
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
           ls ./out_kernel/
       - name: "Patch with kernel patch"
-        if: ${{ env.useKernelPatch == 'true' && env.use_dtb != 'true' }}
+        if: ${{ env.useKernelPatch == 'true' }}
         run: |
           mkdir kernel_patch_processing
           cd kernel_patch_processing
@@ -336,6 +346,9 @@ jobs:
             mv ./Image ./PreImage
             gzip -c ./PreImage > ./Image.gz
             rm -rf ./PreImage
+          else
+            gzip -c Image > Image.gz
+            cat Image.gz dtb > Image.gz-dtb
           fi
           zip -q -r "anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
       - name: "Upload AnyKernel3 image"
