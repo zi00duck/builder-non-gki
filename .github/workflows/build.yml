@@ -309,12 +309,21 @@ jobs:
           if [[ "${{ env.use_dtb }}" == "true" ]]; then
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel
             cd out_kernel
-            gzip_len=$(gzip -l Image.gz-dtb | awk 'NR==2 {print $2}')
-            dd if=Image.gz-dtb of=Image.gz bs=1 skip=0 count=$gzip_len
-            dd if=Image.gz-dtb of=dtb bs=1 skip=$gzip_len
+
+            # Extract uncompressed length from GZIP footer
+            gzip_len=$(od -An -t u4 -j $(($(stat -c %s Image.gz-dtb) - 4)) -N 4 Image.gz-dtb | tr -d ' ')
+
+            # Split into Image.gz and DTB
+            dd if=Image.gz-dtb of=Image.gz bs=1 skip=0 count=$gzip_len status=none
+            dd if=Image.gz-dtb of=dtb bs=1 skip=$gzip_len status=none
+
+            # Decompress
             gunzip -c Image.gz > Image
-            rm -rf ./Image.gz
-            rm -rf ./Image.gz-dtb
+
+            # Clean up
+            rm -f ./Image.gz ./Image.gz-dtb
+
+
             # Output here should be Image and dtb only
             ls
             cd ..
