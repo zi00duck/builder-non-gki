@@ -310,21 +310,47 @@ jobs:
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel
             cd out_kernel
 
-            # Extract uncompressed length from GZIP footer
-            gzip_len=$(od -An -t u4 -j $(($(stat -c %s Image.gz-dtb) - 4)) -N 4 Image.gz-dtb | tr -d ' ')
+            # Extract the real length of gzip stream using 'gzip -c' and 'wc -c'
+            # This decompresses and gets the uncompressed size
+            gzip -cd Image.gz-dtb > /dev/null || echo "gzip warning ignored"
 
-            # Split into Image.gz and DTB
-            dd if=Image.gz-dtb of=Image.gz bs=1 skip=0 count=$gzip_len status=none
+            # Now extract the compressed length using gzip+dd combo
+            gzip_stream_end=$(gzip -cd Image.gz-dtb | wc -c)
+            gzip_len=$(dd if=Image.gz-dtb bs=1 status=none | gzip -dc | wc -c)
+
+            # This doesn't help directly — instead:
+            # Use a tool that can scan GZIP stream — we can use a fixed method:
+            # We will scan for the GZIP footer magic and offset it properly — use Python for more precision
+
+            # Better method: Use Python to find exact GZIP stream length
+            gzip_len=$(python3 -c '
+            with open("Image.gz-dtb", "rb") as f:
+                data = f.read()
+                import gzip
+                import io
+                try:
+                    with gzip.GzipFile(fileobj=io.BytesIO(data)) as gz:
+                        gz.read()
+                        end = gz.fileobj.tell()
+                        print(end)
+                except:
+                    print(0)
+            ')
+
+            if [ "$gzip_len" -eq 0 ]; then
+                echo "Failed to extract gzip stream length."
+                exit 1
+            fi
+
+            # Extract the parts
+            dd if=Image.gz-dtb of=Image.gz bs=1 count=$gzip_len status=none
             dd if=Image.gz-dtb of=dtb bs=1 skip=$gzip_len status=none
 
-            # Decompress
+            # Decompress the Image.gz
             gunzip -c Image.gz > Image
 
             # Clean up
-            rm -f ./Image.gz ./Image.gz-dtb
-
-
-            # Output here should be Image and dtb only
+            rm -f Image.gz Image.gz-dtb
             ls
             cd ..
           else
