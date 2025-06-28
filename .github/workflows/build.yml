@@ -307,50 +307,38 @@ jobs:
           mkdir out_kernel
           ls -al ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot
           if [[ "${{ env.use_dtb }}" == "true" ]]; then
-            cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel
-            cd out_kernel
+          cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image.gz-dtb ./out_kernel
+          cd out_kernel
 
-            # Extract the real length of gzip stream using 'gzip -c' and 'wc -c'
-            # This decompresses and gets the uncompressed size
-            gzip -cd Image.gz-dtb > /dev/null || echo "gzip warning ignored"
+          # Use Python to find the length of valid GZIP stream
+          gzip_len=$(python3 -c '
+          import gzip
+          import io
+          with open("Image.gz-dtb", "rb") as f:
+              data = f.read()
+              try:
+                  with gzip.GzipFile(fileobj=io.BytesIO(data)) as gz:
+                      gz.read()
+                      print(gz.fileobj.tell())
+              except Exception:
+                  print(0)
+          ')
 
-            # Now extract the compressed length using gzip+dd combo
-            gzip_stream_end=$(gzip -cd Image.gz-dtb | wc -c)
-            gzip_len=$(dd if=Image.gz-dtb bs=1 status=none | gzip -dc | wc -c)
+          # Validate result
+          if [ "$gzip_len" -eq 0 ]; then
+              echo "❌ Failed to detect gzip length — aborting."
+              exit 1
+          fi
 
-            # This doesn't help directly — instead:
-            # Use a tool that can scan GZIP stream — we can use a fixed method:
-            # We will scan for the GZIP footer magic and offset it properly — use Python for more precision
+          # Split the GZIP and DTB parts
+          dd if=Image.gz-dtb of=Image.gz bs=1 count=$gzip_len status=none
+          dd if=Image.gz-dtb of=dtb bs=1 skip=$gzip_len status=none
 
-            # Better method: Use Python to find exact GZIP stream length
-            gzip_len=$(python3 -c '
-            with open("Image.gz-dtb", "rb") as f:
-                data = f.read()
-                import gzip
-                import io
-                try:
-                    with gzip.GzipFile(fileobj=io.BytesIO(data)) as gz:
-                        gz.read()
-                        end = gz.fileobj.tell()
-                        print(end)
-                except:
-                    print(0)
-            ')
+          # Decompress to get Image
+          gunzip -c Image.gz > Image
 
-            if [ "$gzip_len" -eq 0 ]; then
-                echo "Failed to extract gzip stream length."
-                exit 1
-            fi
-
-            # Extract the parts
-            dd if=Image.gz-dtb of=Image.gz bs=1 count=$gzip_len status=none
-            dd if=Image.gz-dtb of=dtb bs=1 skip=$gzip_len status=none
-
-            # Decompress the Image.gz
-            gunzip -c Image.gz > Image
-
-            # Clean up
-            rm -f Image.gz Image.gz-dtb
+          # Clean up
+          rm -f Image.gz Image.gz-dtb
             ls
             cd ..
           else
