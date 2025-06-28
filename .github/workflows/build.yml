@@ -303,7 +303,6 @@ jobs:
         env:
           arch: ${{ steps.generate-args.outputs.ARCH }}
         run: |
-          ls -al
           mkdir out_kernel
           ls -al ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot
           if [[ "${{ env.use_dtb }}" == "true" ]]; then
@@ -330,12 +329,12 @@ jobs:
 
             echo "[Rainy's Image.gz-dtb extractor] Done"
 
-            ls
+            rm -rf Image.gz Image.gz-dtb
             cd ..
           else
             cp -f ${{ env.OUT_DIR }}/arch/${{ env.arch }}/boot/Image ./out_kernel/
           fi
-          ls ./out_kernel/
+          ls -al ./out_kernel/
       - name: "Patch with kernel patch"
         if: ${{ env.useKernelPatch == 'true' }}
         run: |
@@ -363,6 +362,7 @@ jobs:
           else
             gzip -c Image > Image.gz
             cat Image.gz dtb > Image.gz-dtb
+            rm -rf Image Image.gz dtb
           fi
           zip -q -r "anykernel-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}" *
       - name: "Upload AnyKernel3 image"
