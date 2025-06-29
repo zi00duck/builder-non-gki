@@ -5,8 +5,8 @@
     "name": "sukisu-ultra",
     "defconfig": "sweet_defconfig",
     "extraConfig": "",
-    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sm6150",
-    "branch": "fifteen-ln8000"
+    "repo": "https://github.com/kernel-build-from-rainyland/kernel_xiaomi_sweet",
+    "branch": "susfs"
   },
   "use_dtb": false,
   "kp": {
@@ -15,7 +15,7 @@
   },
   "kernelsu": {
     "enable": true,
-    "setupLink": "https://raw.githubusercontent.com/SukiSU-Ultra/SukiSU-Ultra/main/kernel/setup.sh",
+    "setupLink": "https://raw.githubusercontent.com/RainyXeon/SukiSU-Ultra/main/kernel/setup.sh",
     "setupArg": "susfs-main",
     "setupName": "KernelSU",
     "needPatch": false,
