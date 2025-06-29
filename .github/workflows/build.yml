@@ -30,6 +30,14 @@ on:
         required: false
         default: ''
         type: string
+      release_mode:
+        description: 'Choose a config type'
+        required: true
+        type: choice
+        default: 'no'
+        options:
+          - yes
+          - no
 
 jobs:
   Set-repos:
@@ -391,3 +399,27 @@ jobs:
         with:
           name: "image-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}"
           path: "out_kernel/image-${{ env.KERNEL_NAME }}-${{ env.KERNEL_DEVICE_VENDOR }}-${{ env.KERNEL_DEVICE }}-${{ env.builddate }}.img"
+
+  publish:
+    needs: [Build-Kernel]
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.config_file == 'yes' }}
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: downloaded_kernels
+          merge-multiple: true
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v2.1.0
+        with:
+          files: downloaded_kernels/**
+          tag_name: v${{ env.builddate }}.${{ github.run_number }}
+          name: v${{ env.builddate }}.${{ github.run_number }}
+          prerelease: false
+          draft: false
+          generate_release_notes: false
+          body: "Open kernel build from RainyLand, patched with [KernelSU-Next](https://github.com/KernelSU-Next/KernelSU-Next) + [SuSFS patches](https://gitlab.com/simonpunk/susfs4ksu).\n\n**Installation:**\n1. Flash the kernel from this release.\n2. Download and install the KernelSU-Next manager APK from here:\n> [Stable Version](https://github.com/KernelSU-Next/KernelSU-Next/releases) || [Nightly Version](https://nightly.link/KernelSU-Next/KernelSU-Next/workflows/build-manager/next/manager)\n\n3. Download and install the SuSFS Module from here: https://github.com/sidex15/susfs4ksu-module/releases/latest"
+          fail_on_unmatched_files: true
+          preserve_order: true
