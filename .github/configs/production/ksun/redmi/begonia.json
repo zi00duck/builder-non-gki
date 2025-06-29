@@ -15,7 +15,7 @@
   }, 
   "kernelsu": {
     "enable": true,
-    "setupLink": "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh"
+    "setupLink": "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh",
     "setupArg": "next",
     "setupName": "KernelSU-Next",
     "needPatch": true,
