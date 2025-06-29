@@ -19,7 +19,7 @@
     "setupArg": "next",
     "setupName": "KernelSU-Next",
     "needPatch": true,
-    "susfsLink": "https://raw.githubusercontent.com/wodanesdag/susfs4ksu/refs/heads/next-4.14/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch" // Patch link
+    "susfsLink": "https://raw.githubusercontent.com/wodanesdag/susfs4ksu/refs/heads/next-4.14/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch"
   },
   "toolchains": [
     {
