@@ -1,0 +1,67 @@
+{
+  "kernelSource": {
+    "device": "begonia",
+    "vendor": "redmi",
+    "name": "fvck-kernelsu-next",
+    "defconfig": "begonia_user_defconfig",
+    "extraConfig": "",
+    "repo": "https://github.com/zi00duck/kernel_xiaomi_mt6785_ksu_susfs",
+    "branch": "bka"
+  },
+  "use_dtb": false,
+  "kp": {
+    "use": false,
+    "kpimg_link": ""
+  }, 
+  "kernelsu": {
+    "enable": true,
+    "setupLink": "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh"
+    "setupArg": "next",
+    "setupName": "KernelSU-Next",
+    "needPatch": true,
+    "susfsLink": "https://raw.githubusercontent.com/wodanesdag/susfs4ksu/refs/heads/next-4.14/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch" // Patch link
+  },
+  "toolchains": [
+    {
+      "url": "https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379",
+      "branch": "15.0",
+      "name": "clang-crDroidP",
+      "binPath": ["./bin"]
+    }
+  ],
+  "ccache": true,
+  "params": {
+    "ARCH": "arm64",
+    "CC": "clang-crDroid/bin/clang",
+    "externalCommand": {
+      "KBUILD_BUILD_HOST": "duck",
+      "KBUILD_BUILD_USER": "fvck",
+      "CROSS_COMPILE": "clang-crDroid/bin/aarch64-linux-gnu-",
+      "CROSS_COMPILE_ARM32": "clang-crDroid/bin/arm-linux-gnueabi-",
+      "LD": "clang-crDroid/bin/ld.lld",
+      "LLVM": "1",
+      "LLVM_IAS": "1",
+      "AR": "clang-crDroid/bin/llvm-ar",
+      "NM": "clang-crDroid/bin/llvm-nm",
+      "OBJCOPY": "clang-crDroid/bin/llvm-objcopy",
+      "OBJDUMP": "clang-crDroid/bin/llvm-objdump",
+      "READELF": "clang-crDroid/bin/llvm-readelf",
+      "OBJSIZE": "clang-crDroid/binllvm-size",
+      "STRIP": "clang-crDroid/bin/llvm-strip",
+      "LDGOLD": "clang-crDroid/bin/aarch64-linux-gnu-ld.gold",
+      "LLVM_AR": "clang-crDroid/bin/llvm-ar",
+      "LLVM_DIS": "clang-crDroid/bin/llvm-dis"
+    }
+  },
+  "image": {
+    "use": false,
+    "imageUrl": "",
+    "imageName": "boot.img"
+  },
+  "AnyKernel3": {
+    "use": true,
+    "release": true,
+    "repo": "https://github.com/cvnertnc/AnyKernel3",
+    "branch": "begonia"
+  }
+}
