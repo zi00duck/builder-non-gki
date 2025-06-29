@@ -403,7 +403,7 @@ jobs:
   publish:
     needs: [Build-Kernel]
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.config_file == 'true' }}
+    if: ${{ github.event.inputs.release_mode == 'true' }}
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
